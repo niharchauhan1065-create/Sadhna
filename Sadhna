@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sadhna ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffc0cb; 
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            z-index: 10;
+            background: white;
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 85%;
+            max-width: 350px;
+        }
+
+        h1 { color: #d63384; font-size: 2.5rem; margin: 0; }
+        h2 { color: #ff6b81; font-size: 1.5rem; font-weight: normal; margin: 10px 0 30px 0; }
+
+        .buttons { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 15px;
+            height: 80px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+        }
+
+        #yesBtn { 
+            background-color: #ff4d6d; 
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        #noBtn { 
+            background-color: #f8f9fa; 
+            color: #6c757d; 
+            border: 1px solid #ddd;
+            position: relative; 
+            z-index: 50;
+        }
+
+        .falling-item {
+            position: fixed;
+            top: -10%;
+            animation: fall linear forwards;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="mainH">Sadhna...</h1>
+        <h2 id="subH">Do you love me? ❤️</h2>
+        
+        <div class="buttons" id="btnGroup">
+            <button id="yesBtn" onclick="celebrate()">Yes, I love you!</button>
+            <button id="noBtn" onmouseover="runAway()" onclick="runAway()">No, I don't</button>
+        </div>
+    </div>
+
+    <script>
+        // Reduced gap runaway logic
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            const randomX = Math.random() * 160 - 80; 
+            const randomY = Math.random() * 160 - 80;
+            btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+
+        function createRain(emoji) {
+            const el = document.createElement('div');
+            el.classList.add('falling-item');
+            el.innerHTML = emoji;
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            el.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 4000);
+        }
+
+        function celebrate() {
+            // Personalized message for Sadhna
+            document.getElementById('mainH').innerHTML = "Yay! ❤️";
+            document.getElementById('subH').innerHTML = "I love you too, Sadhna!";
+            document.getElementById('btnGroup').style.display = "none";
+            
+            document.body.style.background = "#ff85a2";
+
+            const emojis = ['❤️', '🌸', '🌹', '✨', '💖', '🌷', '💐'];
+            
+            // Start the rain of hearts and flowers
+            setInterval(() => {
+                const rand = emojis[Math.floor(Math.random() * emojis.length)];
+                createRain(rand);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
